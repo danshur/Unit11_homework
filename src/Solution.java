@@ -13,7 +13,6 @@ public class Solution implements Runnable {
 		try {
 			obj.sayHello();
 		} catch (InterruptedException e) {
-			//obj.setRea
 		}
 	}
 
@@ -21,15 +20,17 @@ public class Solution implements Runnable {
 		SharedObject obj = new SharedObject();
 		Solution s = new Solution(obj);
 		Thread t1 = new Thread(s);
-		//Thread t2 = new Thread(s);
+		t1.setName("thread1");
 		t1.start();
-		//t2.start();
+		
 		Thread.sleep(100);
-		//obj.setReady();
 		String[] names = { "Tobias", "John", "Kate" };
 		for (String name : names) {
-			obj.setName(name);
+			System.out.println("Solution says: about to set name to " + name);
 			
+			obj.setName(name);
+			System.out.println("Solution says: thread named " +t1.getName() + " is alive = " + t1.isAlive() );
+			// notify();
 		}
 	}
 }
